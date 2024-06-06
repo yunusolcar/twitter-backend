@@ -26,3 +26,13 @@ class Tweet(models.Model):
 
     def __str__(self):
         return f"{self.author.username}"
+
+
+"""
+Hashtag Model
+"""
+
+
+class Hashtag(models.Model):
+    name = models.CharField(max_length=50, unique=True)
+    tweets = models.ManyToManyField(Tweet, related_name='hashtags')

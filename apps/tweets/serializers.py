@@ -18,4 +18,4 @@ class TweetSerializer(serializers.ModelSerializer):
 class HashtagSerializer(serializers.ModelSerializer):
     class Meta:
         model = Hashtag
-        fields = ['id', 'name', 'tweets']
+        fields = '__all__'

@@ -1,8 +1,8 @@
 from rest_framework import filters
 from rest_framework.viewsets import ModelViewSet
 
-from .serializers import UserProfileSerializer, TweetSerializer, HashtagSerializer
 from .models import UserProfile, Tweet, Hashtag
+from .serializers import UserProfileSerializer, TweetSerializer, HashtagSerializer
 
 
 class UserProfileModelViewSet(ModelViewSet):
@@ -12,13 +12,20 @@ class UserProfileModelViewSet(ModelViewSet):
     search_fields = ['username']
 
 
+class HashtagViewSet(ModelViewSet):
+    queryset = Hashtag.objects.all()
+    serializer_class = HashtagSerializer
+
+
 class TweetModelViewSet(ModelViewSet):
     queryset = Tweet.objects.all()
     serializer_class = TweetSerializer
     filter_backends = [filters.SearchFilter]
     search_fields = ['content']
 
-
-class HashtagViewSet(ModelViewSet):
-    queryset = Hashtag.objects.all()
-    serializer_class = HashtagSerializer
+    def filter_queryset(self, queryset):
+        queryset = super().filter_queryset(queryset)
+        hashtag_name = self.request.query_params.get('hashtags')
+        if hashtag_name:
+            queryset = queryset.filter(hashtags__name=hashtag_name)
+        return queryset

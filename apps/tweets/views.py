@@ -35,7 +35,7 @@ class TweetModelViewSet(ModelViewSet):
     when the tweet is deleted, the is_deleted field becomes True and does not appear on the screen
     """
 
-    def soft_delete(self, request, *args, **kwargs):
+    def destroy(self, request, *args, **kwargs):
         instance = self.get_object()
         delete_tweet = request.data.get('delete_tweet')
         if delete_tweet:
@@ -44,4 +44,5 @@ class TweetModelViewSet(ModelViewSet):
             instance.save()
             return Response(status=status.HTTP_204_NO_CONTENT)
         else:
-            return Response(status=status.HTTP_400_BAD_REQUEST)
+            return Response({"error": "delete reason must be added!"}, status=status.HTTP_400_BAD_REQUEST)
+

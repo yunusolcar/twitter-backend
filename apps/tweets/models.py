@@ -36,6 +36,8 @@ class Tweet(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     author = models.ForeignKey(UserProfile, related_name='tweets', on_delete=models.CASCADE)
     hashtags = models.ManyToManyField(Hashtag, blank=True)
+    is_deleted = models.BooleanField(default=False)
+    delete_tweet = models.TextField(null=True, blank=True)
 
     def __str__(self):
         return f"{self.author.username}"

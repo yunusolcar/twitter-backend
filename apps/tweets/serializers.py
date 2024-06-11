@@ -6,10 +6,11 @@ from .models import Tweet, Hashtag
 class TweetSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tweet
-        fields = '__all__'
+        fields = ['id', 'content', 'created_at', 'author', 'hashtags']
+        read_only_fields = ['author']
 
 
 class HashtagSerializer(serializers.ModelSerializer):
     class Meta:
         model = Hashtag
-        fields = '__all__'
+        fields = ['id', 'name']

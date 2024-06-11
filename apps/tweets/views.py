@@ -13,6 +13,16 @@ class TweetModelViewSet(ModelViewSet):
     search_fields = ['content']
     permission_classes = [IsAuthenticated]
 
+    def perform_create(self, serializer):
+        serializer.save(author=self.request.user)
+
+    def filter_queryset(self, queryset):
+        queryset = super().filter_queryset(queryset)
+        hashtag_name = self.request.query_params.get('hashtag')
+        if hashtag_name:
+            queryset = queryset.filter(hashtags__name=hashtag_name)
+        return queryset
+
 
 class HashtagViewSet(ModelViewSet):
     queryset = Hashtag.objects.all()

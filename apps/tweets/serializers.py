@@ -1,12 +1,6 @@
 from rest_framework import serializers
 
-from .models import UserProfile, Tweet, Hashtag
-
-
-class UserProfileSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = UserProfile
-        fields = '__all__'
+from .models import Tweet, Hashtag
 
 
 class TweetSerializer(serializers.ModelSerializer):

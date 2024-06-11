@@ -4,7 +4,6 @@ import django.db.models.deletion
 from django.conf import settings
 from django.db import migrations, models
 
-
 class Migration(migrations.Migration):
 
     initial = True
@@ -19,6 +18,15 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(max_length=50, unique=True)),
+            ],
+        ),
+        migrations.CreateModel(
+            name='UserProfile',
+            fields=[
+                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('username', models.CharField(max_length=50, unique=True)),
+                ('bio', models.TextField(blank=True)),
+                ('created_at', models.DateTimeField(auto_now_add=True)),
             ],
         ),
         migrations.CreateModel(

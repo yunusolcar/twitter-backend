@@ -1,6 +1,6 @@
 from django.db import models
 
-from apps.account.models import UserProfile
+from apps.users.models import UserProfile
 
 """
 Hashtag Model
@@ -23,7 +23,7 @@ class Tweet(models.Model):
     content = models.TextField(max_length=500)
     created_at = models.DateTimeField(auto_now_add=True)
     author = models.ForeignKey(UserProfile, related_name='tweets', on_delete=models.CASCADE)
-    hashtags = models.ManyToManyField(Hashtag, blank=True, )
+    hashtags = models.ManyToManyField(Hashtag, related_name='tweets', blank=True, )
 
     def __str__(self):
         return f"{self.author.username}"

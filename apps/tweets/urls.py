@@ -1,10 +1,10 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 
-from .views import TweetModelViewSet, HashtagViewSet
+from .views import TweetViewSet, HashtagViewSet
 
 router = DefaultRouter()
-router.register(r'tweets', TweetModelViewSet)
+router.register(r'tweets', TweetViewSet)
 router.register(r'hashtags', HashtagViewSet)
 
 urlpatterns = [
